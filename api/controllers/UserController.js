@@ -19,7 +19,16 @@ module.exports = {
             }
 
             req.session.flash = {};
-            return res.json(user);
+            return res.redirect('/user/show/'+user.id);
+        });
+    },
+    show: function(req, res, next) {
+        User.findOne(req.param('id'), function(err, user) {
+            if (err) { return next(err); }
+            if (!user) { return next('User has not been found.'); }
+            return res.view({
+                user: user
+            });
         });
     }
 };
