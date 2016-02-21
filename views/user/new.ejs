@@ -5,6 +5,13 @@
                 <form class="form-horizontal" method="post" action="/user/create">
                     <fieldset>
                         <legend>Sing Up Form</legend>
+                        <% if (flash && flash.err) { %>
+                            <ul class="alert alert-success">
+                            <% Object.keys(flash.err).forEach(function(error) { %>
+                                <li><%= JSON.stringify(flash.err[error]) %></li>
+                            <% }); %>
+                            </ul>
+                        <% } %>
                         <div class="form-group">
                             <label class="col-lg-2 control-label">Name</label>
                             <div class="col-lg-10">
