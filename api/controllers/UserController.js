@@ -59,5 +59,16 @@ module.exports = {
             req.session.flash = {};
             return res.redirect('/user/show/' + req.param('id'));
         });
+    },
+    destroy: function (req, res, next) {
+        User.findOne(req.param('id'), function (err, user) {
+            if (err) return next(err);
+            if (!user) return next('User has not been found.');
+
+            User.destroy(req.param('id'), function(err) {
+               if (err) return next(err);
+            });
+            res.redirect('/user');
+        });
     }
 };

@@ -27,7 +27,13 @@
                         <td><%= user.email %></td>
                         <td><a href="/user/show/<%= user.id %>" class="btn btn-info"> <i class="glyphicon glyphicon-eye-open"></i> Show</a></td>
                         <td><a href="/user/edit/<%= user.id %>" class="btn btn-success"> <i class="glyphicon glyphicon-edit"></i> Edit</a></td>
-                        <td><a href="/user/destroy/<%= user.id %>" class="btn btn-danger"> <i class="glyphicon glyphicon-remove-circle"></i> Delete</a></td>
+                        <td>
+                            <form action="/user/destroy/<%= user.id %>">
+                                <button class="btn btn-danger" type="submit"> <i class="glyphicon glyphicon-remove-circle"></i> Delete</button>
+                                <input type="hidden" name="_method" value="delete" />
+                                <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+                            </form>
+                         </td>
                     </tr>
                     <% }); %>
                     </tbody>
