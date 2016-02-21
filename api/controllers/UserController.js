@@ -6,6 +6,15 @@
  */
 
 module.exports = {
+    index: function(req, res, next) {
+        User.find(function(err, users) {
+            if (err) { return next(err); }
+            if (!users) { return next('No user has been found.'); }
+            return res.view({
+                users: users
+            });
+        });
+    },
     new: function (req, res) {
         return res.view();
     },
