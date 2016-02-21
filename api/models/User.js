@@ -23,7 +23,16 @@ module.exports = {
       type: 'string'
     },
     encryptedPassword: {
-      type: 'string'
+      type: 'string',
+      columnName: 'password'
+    },
+    createdAt: {
+      type: 'datetime',
+      columnName: 'created_at'
+    },
+    updatedAt: {
+      type: 'datetime',
+      columnName: 'updated_at'
     },
     toJSON: function() {
       var obj = this.toObject();
