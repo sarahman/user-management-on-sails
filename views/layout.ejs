@@ -46,9 +46,26 @@
                   <span class="icon-bar"></span>
               </button>
               <a class="navbar-brand" href="#">Sails Scratch</a>
+              <%if (session.User && session.User.isAdmin) { %>
+              <ul class="nav navbar-nav">
+                  <li><a href="/user">Users</a></li>
+              </ul>
+              <% } %>
           </div>
           <%if (session.authenticated) { %>
-          <a href="/session/destroy" class="btn btn-success navbar-btn navbar-right">Logout</a>
+          <ul class="nav navbar-nav navbar-right">
+              <li>
+                  <div class="btn-group">
+                      <a class="btn btn-info" href="<%= '/user/show/' + session.User.id %>"><%= session.User.name %></a>
+                      <a data-toggle="dropdown" class="btn btn-primary dropdown-toggle" href="javascript: void(0)">
+                          <span class="caret"></span>
+                      </a>
+                      <ul class="dropdown-menu">
+                          <li><a id="logout" href="/session/destroy">Logout</a></li>
+                      </ul>
+                  </div>
+              </li>
+          </ul>
           <% } else { %>
           <div class="navbar-collapse collapse">
               <form class="navbar-form navbar-right" role="form" action="/session/create" method="POST">
