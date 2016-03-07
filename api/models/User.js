@@ -26,6 +26,11 @@ module.exports = {
       type: 'string',
       columnName: 'password'
     },
+    isAdmin: {
+      type: 'boolean',
+      defaultsTo: false,
+      columnName: 'is_admin'
+    },
     createdAt: {
       type: 'datetime',
       columnName: 'created_at'
