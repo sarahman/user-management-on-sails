@@ -92,5 +92,18 @@ module.exports = {
             });
             res.redirect('/user');
         });
+    },
+    subscribe: function (req, res) {
+        User.find(function (err, users) {
+            if (err) return next(err);
+
+            User.watch(req.socket);
+            User.subscribe(req.socket, users);
+            if (req.isSocket) {
+                return res.send(200);
+            } else {
+                return res.redirect('/session/new');
+            }
+        });
     }
 };

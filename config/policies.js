@@ -33,6 +33,7 @@ module.exports.policies = {
         show: ['flash', 'authentication', 'user-profile'],
         edit: ['flash', 'authentication', 'user-profile'],
         update: ['flash', 'authentication', 'user-profile'],
+        subscribe: 'flash',
         '*': 'admin'
     }
 

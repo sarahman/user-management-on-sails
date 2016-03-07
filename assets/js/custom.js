@@ -36,3 +36,5 @@ $(function() {
         errorElement: 'span'
     });
 });
+
+io.socket.get('/user/subscribe');
