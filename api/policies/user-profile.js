@@ -6,7 +6,7 @@
  */
 module.exports = function (req, res, ok) {
 
-    var loggedInUserMatchesId = req.session.User.id = req.param('id'),
+    var loggedInUserMatchesId = req.session.User.id == req.param('id'),
         isAdmin = req.session.User.isAdmin;
 
     if (loggedInUserMatchesId || isAdmin) {
