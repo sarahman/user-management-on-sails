@@ -29,8 +29,10 @@ module.exports = {
             }
 
             req.session.flash = {};
-            req.session.authenticated = true;
-            req.session.User = user;
+            if (!req.session.authenticated) {
+                req.session.authenticated = true;
+                req.session.User = user;
+            }
             return res.redirect('/user/show/' + user.id);
         });
     },
