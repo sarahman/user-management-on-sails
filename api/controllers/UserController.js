@@ -20,7 +20,14 @@ module.exports = {
         return res.view();
     },
     create: function (req, res) {
-        User.create(req.params.all(), function (err, user) {
+        var userObj = {
+            name: req.param('name'),
+            title: req.param('title'),
+            email: req.param('email'),
+            password: req.param('password'),
+            confirmation: req.param('confirmation')
+        };
+        User.create(userObj, function (err, user) {
             if (err) {
                 req.session.flash = {
                     err: err
@@ -62,7 +69,13 @@ module.exports = {
         });
     },
     update: function (req, res) {
-        User.update(req.param('id'), req.params.all(), function (err) {
+        var userObj = {
+            name: req.param('name'),
+            title: req.param('title'),
+            email: req.param('email')
+        };
+        req.session.User.isAdmin ? userObj['is_admin'] = req.param('is_admin') : null;
+        User.update(req.param('id'), userObj, function (err) {
             if (err) return res.redirect('/user/edit/' + req.param('id'));
 
             req.session.flash = {};
