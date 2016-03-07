@@ -3,7 +3,13 @@
         <div class="jumbotron">
             <form class="form-horizontal" method="post" action="/user/create" id="sign-up">
                 <fieldset>
-                    <legend>Sing Up Form</legend>
+                    <legend>
+                        <% if (session.User && session.User.isAdmin) { %>
+                        User Creation Form
+                        <% } else { %>
+                        Sing Up Form
+                        <% } %>
+                    </legend>
                     <% if (flash && flash.err) { %>
                         <ul class="alert alert-success">
                         <% Object.keys(flash.err).forEach(function(error) { %>
@@ -41,6 +47,19 @@
                             <input type="password" name="confirmation" placeholder="Repeat Password" class="form-control" />
                         </div>
                     </div>
+                    <% if (session.User && session.User.isAdmin) { %>
+                    <div class="form-group">
+                        <div class="col-lg-10 col-lg-offset-2">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="hidden" name="is_admin" value="0" />
+                                    <input type="checkbox" name="is_admin" />
+                                    Is Admin
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
                     <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-2">
                             <button class="btn btn-success" type="submit">Submit</button>

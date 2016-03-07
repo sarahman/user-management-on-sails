@@ -20,6 +20,13 @@
                 <td><strong>Email</strong></td>
                 <td><%= user.email %></td>
             </tr>
+            <tr>
+                <td><strong>User Type</strong></td>
+                <td>
+                    <i class="glyphicon glyphicon-<%= user.isAdmin ? 'tower' : 'user' %>"
+                        title="<%= user.isAdmin ? 'Admin' : 'User' %>"></i>
+                </td>
+            </tr>
             </tbody>
         </table>
 
