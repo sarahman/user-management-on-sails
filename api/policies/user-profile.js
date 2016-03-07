@@ -17,5 +17,5 @@ module.exports = function (req, res, ok) {
     req.session.flash = {
         err: [{ name: 'noRights', message: 'You must be an admin user.' }]
     };
-    return res.redirect('/session/new');
+    return res.redirect('back');
 };
