@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-lg-6 col-lg-offset-3">
+        <div class="jumbotron">
+            <form class="form-horizontal" method="POST" action="/session/create">
+                <fieldset>
+                    <legend>Sing In Form</legend>
+                    <% if (flash && flash.err) { %>
+                        <ul class="alert alert-success">
+                        <% Object.keys(flash.err).forEach(function(error) { %>
+                            <li><%= JSON.stringify(flash.err[error]) %></li>
+                        <% }); %>
+                        </ul>
+                    <% } %>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Email</label>
+                        <div class="col-lg-10">
+                            <input type="email" name="email" placeholder="Email" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Password</label>
+                        <div class="col-lg-10">
+                            <input type="password" name="password" placeholder="Password" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-10 col-lg-offset-2">
+                            <button class="btn btn-success" type="submit">Sing In</button>
+                            <a class="btn btn-info" href="/">Cancel</a>
+                            <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
