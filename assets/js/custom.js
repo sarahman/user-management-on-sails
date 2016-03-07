@@ -37,4 +37,27 @@ $(function() {
     });
 });
 
+io.socket.on('user', function (event){
+    var page = document.location.pathname;
+    page = page.replace(/(\/)$/, '');
+
+    switch(page) {
+        case '/user':
+            if (event.verb === 'updated') {
+                UserIndexPage.updateUser(event.id, event.data);
+            }
+            break;
+    }
+});
+
 io.socket.get('/user/subscribe');
+var UserIndexPage = {
+    updateUser: function(id, message) {
+        var $userRow = $('tr[data-id="' + id + '"] td:eq(1) i');
+        if (message.loggedIn) {
+            $userRow.addClass('glyphicon-log-in').removeClass('glyphicon-log-out');
+        } else {
+            $userRow.removeClass('glyphicon-log-in').addClass('glyphicon-log-out');
+        }
+    }
+};

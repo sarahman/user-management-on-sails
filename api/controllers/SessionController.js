@@ -6,7 +6,7 @@
  */
 
 module.exports = {
-	new: function(req, res) {
+    new: function(req, res) {
         return res.view();
     },
     create: function(req, res, next) {
@@ -45,8 +45,12 @@ module.exports = {
                 req.session.authenticated = true;
                 req.session.User = user;
                 user.isOnline = true;
-                user.save(function(err, user) {
+                user.save(function(err) {
                     if (err) return next(err);
+                    User.publishUpdate(user.id, {
+                        loggedIn: true,
+                        id: user.id
+                    });
                     if (req.session.User.isAdmin) {
                         return res.redirect('/user');
                     }
@@ -63,6 +67,10 @@ module.exports = {
             }, function(err) {
                 if (err) return next(err);
 
+                User.publishUpdate(user.id, {
+                    loggedIn: false,
+                    id: user.id
+                });
                 req.session.destroy();
                 return res.redirect('/session/new');
             });
