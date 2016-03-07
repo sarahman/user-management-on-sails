@@ -60,20 +60,30 @@ module.exports = {
         });
     },
     destroy: function(req, res, next) {
+        if (!req.session.authenticated) {
+            return logoutAndRedirect();
+        }
         User.findOne(req.session.User.id, function(err, user) {
             if (err) return next(err);
-            User.update(user.id, {
-                isOnline: false
-            }, function(err) {
-                if (err) return next(err);
+            if (user) {
+                User.update(user.id, {
+                    isOnline: false
+                }, function(err) {
+                    if (err) return next(err);
 
-                User.publishUpdate(user.id, {
-                    loggedIn: false,
-                    id: user.id
+                    User.publishUpdate(user.id, {
+                        loggedIn: false,
+                        id: user.id
+                    });
+                    return logoutAndRedirect();
                 });
-                req.session.destroy();
-                return res.redirect('/session/new');
-            });
+            } else {
+                return logoutAndRedirect();
+            }
         });
+        function logoutAndRedirect() {
+            req.session.destroy();
+            return res.redirect('/session/new');
+        }
     }
 };
