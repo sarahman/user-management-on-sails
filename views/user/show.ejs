@@ -27,6 +27,15 @@
                         title="<%= user.isAdmin ? 'Admin' : 'User' %>"></i>
                 </td>
             </tr>
+            <% if (session.User && session.User.isAdmin) { %>
+            <tr>
+                <td><strong>User Type</strong></td>
+                <td>
+                    <i class="glyphicon glyphicon-<%= user.isOnline ? 'log-in' : 'log-out' %>"
+                       title="<%= user.isOnline ? 'Logged In' : 'Logged Out' %>"></i>
+                </td>
+            </tr>
+            <% } %>
             </tbody>
         </table>
 

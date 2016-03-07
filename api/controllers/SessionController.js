@@ -44,15 +44,28 @@ module.exports = {
 
                 req.session.authenticated = true;
                 req.session.User = user;
-                if (req.session.User.isAdmin) {
-                    return res.redirect('/user');
-                }
-                return res.redirect('/user/show/' + user.id);
+                user.isOnline = true;
+                user.save(function(err, user) {
+                    if (err) return next(err);
+                    if (req.session.User.isAdmin) {
+                        return res.redirect('/user');
+                    }
+                    return res.redirect('/user/show/' + user.id);
+                });
             });
         });
     },
-    destroy: function(req, res) {
-        req.session.destroy();
-        return res.redirect('/session/new');
+    destroy: function(req, res, next) {
+        User.findOne(req.session.User.id, function(err, user) {
+            if (err) return next(err);
+            User.update(user.id, {
+                isOnline: false
+            }, function(err) {
+                if (err) return next(err);
+
+                req.session.destroy();
+                return res.redirect('/session/new');
+            });
+        });
     }
 };

@@ -32,6 +32,11 @@ module.exports = {
             if (!req.session.authenticated) {
                 req.session.authenticated = true;
                 req.session.User = user;
+                user.isOnline = true;
+                user.save(function(err, user) {
+                    if (err) return next(err);
+                    return res.redirect('/user/show/' + user.id);
+                });
             }
             return res.redirect('/user/show/' + user.id);
         });

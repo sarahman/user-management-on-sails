@@ -12,6 +12,7 @@
                     <thead>
                     <tr>
                         <th class="text-center">ID</th>
+                        <th class="text-center">User Online</th>
                         <th>Name</th>
                         <th>Title</th>
                         <th>Email</th>
@@ -23,6 +24,10 @@
                     <% _.each(users, function(user) { %>
                     <tr data-id="<%= user.id %>" data-model="user">
                         <td class="text-center"><%= user.id %></td>
+                        <td class="text-center">
+                            <i class="glyphicon glyphicon-<%= user.isOnline ? 'log-in' : 'log-out' %>"
+                               title="<%= user.isOnline ? 'Logged In' : 'Logged Out' %>"></i>
+                        </td>
                         <td><%= user.name %></td>
                         <td><%= user.title %></td>
                         <td><%= user.email %></td>

@@ -31,6 +31,11 @@ module.exports = {
             defaultsTo: false,
             columnName: 'is_admin'
         },
+        isOnline: {
+            type: 'boolean',
+            defaultsTo: false,
+            columnName: 'is_online'
+        },
         createdAt: {
             type: 'datetime',
             columnName: 'created_at'
