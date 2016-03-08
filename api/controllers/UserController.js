@@ -89,10 +89,11 @@ module.exports = {
             if (err) return next(err);
             if (!user) return next('User has not been found.');
 
-            User.destroy(req.param('id'), function(err) {
-               if (err) return next(err);
+            User.destroy(user, function (err) {
+                if (err) return next(err);
+                User.publishDestroy(user.id);
+                return res.redirect('/user');
             });
-            res.redirect('/user');
         });
     },
     subscribe: function (req, res) {

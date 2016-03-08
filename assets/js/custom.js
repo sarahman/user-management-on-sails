@@ -49,6 +49,9 @@ io.socket.on('user', function (event){
             if (event.verb === 'updated') {
                 UserIndexPage.updateUser(event.id, event.data);
             }
+            if (event.verb === 'destroyed') {
+                UserIndexPage.destroyUser(event.id);
+            }
             break;
     }
 });
@@ -71,5 +74,8 @@ var UserIndexPage = {
         } else {
             $userRow.removeClass('glyphicon-log-in').addClass('glyphicon-log-out');
         }
+    },
+    destroyUser: function(id) {
+        $('tr[data-id="' + id + '"]').remove();
     }
 };
