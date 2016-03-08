@@ -43,6 +43,9 @@ io.socket.on('user', function (event){
 
     switch(page) {
         case '/user':
+            if (event.verb === 'created') {
+                UserIndexPage.addUser(event.id, event.data);
+            }
             if (event.verb === 'updated') {
                 UserIndexPage.updateUser(event.id, event.data);
             }
@@ -52,6 +55,15 @@ io.socket.on('user', function (event){
 
 io.socket.get('/user/subscribe');
 var UserIndexPage = {
+    addUser: function(id, user) {
+        var userObj = {
+            user: user,
+            _csrf: window['overload'].csrf || ''
+        };
+        $('tr:last').after(
+            JST['assets/templates/addUser.ejs'](userObj)
+        );
+    },
     updateUser: function(id, message) {
         var $userRow = $('tr[data-id="' + id + '"] td:eq(1) i');
         if (message.loggedIn) {
