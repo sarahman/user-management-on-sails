@@ -34,7 +34,7 @@ module.exports.policies = {
         edit: ['flash', 'authentication', 'user-profile'],
         update: ['flash', 'authentication', 'user-profile'],
         subscribe: 'flash',
-        '*': 'admin'
+        '*': ['authentication', 'admin']
     }
 
   /***************************************************************************
