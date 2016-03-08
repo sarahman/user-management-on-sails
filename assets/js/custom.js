@@ -4,7 +4,7 @@ $(function() {
             name: { required: true },
             email: { required: true, email: true },
             password: { required: true, minlength: 6 },
-            confirmation: { required: true, equalTo: 'input[name="password"]' }
+            confirmation: { required: true, equalTo: '#password' }
         },
         messages: {
             name: { required: 'Please enter your name.' },
