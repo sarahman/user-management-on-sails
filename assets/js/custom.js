@@ -68,6 +68,10 @@ var UserIndexPage = {
         );
     },
     updateUser: function(id, message) {
+        if (id == $('#user-nav').attr('data-id')) {
+            window.location = '/session/new';
+            return;
+        }
         var $userRow = $('tr[data-id="' + id + '"] td:eq(1) i');
         if (message.loggedIn) {
             $userRow.addClass('glyphicon-log-in').removeClass('glyphicon-log-out');

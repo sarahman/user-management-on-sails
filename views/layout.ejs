@@ -53,7 +53,7 @@
               <% } %>
           </div>
           <%if (session.authenticated) { %>
-          <ul class="nav navbar-nav navbar-right">
+          <ul class="nav navbar-nav navbar-right" id="user-nav" data-id="<%= session.User.id %>">
               <li>
                   <div class="btn-group">
                       <a class="btn btn-info" href="<%= '/user/show/' + session.User.id %>"><%= session.User.name %></a>
