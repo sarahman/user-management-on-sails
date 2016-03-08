@@ -1,5 +1,5 @@
 {
-  "name": "sails-scratch",
+  "name": "sails-user-management",
   "private": true,
   "version": "0.0.0",
   "description": "a Sails application",
@@ -23,7 +23,8 @@
     "rc": "~0.5.0",
     "sails": "^0.12.1",
     "sails-disk": "~0.10.0",
-    "sails-mongo": "^0.12.0"
+    "sails-mongo": "^0.12.0",
+    "sails-mysql": "^0.11.5"
   },
   "scripts": {
     "debug": "node debug app.js",
@@ -32,8 +33,8 @@
   "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/abid/sails-scratch.git"
+    "url": "git://github.com/abid/sails-user-management.git"
   },
-  "author": "abid",
+  "author": "Syed Abidur Rahman",
   "license": ""
 }
