@@ -36,16 +36,21 @@ module.exports = {
             }
 
             req.session.flash = {};
-            User.publishCreate(user, req.socket);
             if (!req.session.authenticated) {
                 req.session.authenticated = true;
                 req.session.User = user;
                 user.isOnline = true;
-                user.save(function (err) {
+                user.save(function (err, u) {
+                    console.log(err, u);
                     if (err) return next(err);
-                    return res.redirect('/user/show/' + user.id);
+                    return publishAndRedirect();
                 });
             } else {
+                return publishAndRedirect();
+            }
+
+            function publishAndRedirect() {
+                User.publishCreate(user, req.socket);
                 return res.redirect('/user/show/' + user.id);
             }
         });
